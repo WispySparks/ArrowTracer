@@ -2,17 +2,18 @@ plugins {
     id 'eclipse'
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '5.1.+'
+    // id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 
 version = '1.0'
-group = 'com.wispy.arrowtracer' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = 'com.wispy.arrowtracer' 
 archivesBaseName = 'arrowtracer'
 
-// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
+    // mappings channel: 'parchment', version: '2022.08.21-1.19.2'
     mappings channel: 'official', version: '1.19.2'
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
     runs {
@@ -78,7 +79,7 @@ jar {
         attributes([
                 "Specification-Title"     : "arrowtracer",
                 "Specification-Vendor"    : "arrowtracersareus",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
+                "Specification-Version"   : "1", 
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "arrowtracersareus",
@@ -106,5 +107,5 @@ publishing {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+    options.encoding = 'UTF-8'
 }
