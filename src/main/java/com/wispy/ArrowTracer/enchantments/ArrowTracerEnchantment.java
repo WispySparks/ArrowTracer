@@ -11,13 +11,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class ArrowTracerEnchantment extends Enchantment {
 
-    public ArrowTracerEnchantment(Rarity rarity, EnchantmentCategory enchantmentCategory, EquipmentSlot... equipmentSlots) {
-        super(rarity, enchantmentCategory, equipmentSlots);
+    public ArrowTracerEnchantment(Rarity pRarity, EnchantmentCategory pCategory, EquipmentSlot... pApplicableSlots) {
+        super(pRarity, pCategory, pApplicableSlots);
     }
     
     @Override
-    public void doPostHurt(LivingEntity attacker, Entity target, int level) {
-        EntityType.LIGHTNING_BOLT.spawn((ServerLevel) attacker.level, null, null, target.blockPosition(), MobSpawnType.TRIGGERED, true, true);
+    public void doPostAttack(LivingEntity pAttacker, Entity pTarget, int pLevel) {
+        EntityType.LIGHTNING_BOLT.spawn((ServerLevel) pAttacker.level, null, null, pTarget.blockPosition(), MobSpawnType.TRIGGERED, true, true);
     }
 
 }
