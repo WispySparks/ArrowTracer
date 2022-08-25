@@ -1,0 +1,19 @@
+modLoader="javafml"
+loaderVersion="[43,)"
+license="MIT"
+[[mods]]
+modId="arrowtracer" 
+version="${file.jarVersion}" 
+displayName="Arrow Tracer" 
+#updateJSONURL="https://change.me.example.invalid/updates.json"
+#displayURL="https://change.me.to.your.mods.homepage.example.invalid/" 
+#credits=""
+authors="Wispy" 
+#displayTest="MATCH_VERSION" # MATCH_VERSION is the default if nothing is specified (#optional)
+description='''
+A mod that adds in a custom enchantment for bows that trace a where the arrow will go when fired.
+'''
+# This version range declares a minimum of the current minecraft version up to but not including the next major version
+    versionRange="[1.19.2,1.20)"
+    ordering="NONE"
+    side="BOTH"
