@@ -15,19 +15,19 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-@Mod(ArrowTracer.modID)
+@Mod(ArrowTracer.MODID)
 public class ArrowTracer {
 
-    public static final String modID = "arrowtracer";
-    public static final Logger logger = LogUtils.getLogger();
-    public static final DeferredRegister<Enchantment> enchantments = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, modID);
+    public static final String MODID = "arrowtracer";
+    public static final Logger LOGGER = LogUtils.getLogger();
+    public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, MODID);
     public static Enchantment tracingEnchantment =  new ArrowTracerEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND);
-    public static RegistryObject<Enchantment> regTracingEnchantment = enchantments.register("tracing", () -> tracingEnchantment);
+    public static RegistryObject<Enchantment> regTracingEnchantment = ENCHANTMENTS.register("tracing", () -> tracingEnchantment);
 
     public ArrowTracer() {
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new Events());
-        enchantments.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ENCHANTMENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
 }

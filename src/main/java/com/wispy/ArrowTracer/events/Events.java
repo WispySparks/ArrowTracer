@@ -1,7 +1,6 @@
 package com.wispy.ArrowTracer.events;
 
 import com.wispy.ArrowTracer.ArrowTracer;
-import com.wispy.ArrowTracer.enchantments.ArrowTracerEnchantment;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -22,7 +21,10 @@ public class Events {
         if (player.getUseItem().getItem() instanceof BowItem) {
             BowItem bow = (BowItem) player.getUseItem().getItem();
             if (bow.getEnchantmentLevel(player.getUseItem(), ArrowTracer.tracingEnchantment) > 0) { // now you have a tracing bow thats charging
-                bow.releaseUsing(player.getUseItem(), player.level, player, 10);
+                bow.releaseUsing(player.getUseItem(), player.level, player, player.getUseItemRemainingTicks());
+                int charge = bow.getUseDuration(player.getUseItem()) - player.getUseItemRemainingTicks();
+                float velocity = BowItem.getPowerForTime(charge);
+                System.out.println(velocity);
             }
         }
     }
@@ -47,7 +49,7 @@ public class Events {
             Entity arrow = event.getSource().getDirectEntity();
             for (String tag : arrow.getTags()) {
                 if (tag.equals("tracing")) {
-                    ArrowTracerEnchantment.spawnTrap(arrow.getLevel(), arrow.blockPosition());
+                    // ArrowTracerEnchantment.spawnTrap(arrow.getLevel(), arrow.blockPosition());
                 }
             }
         }
