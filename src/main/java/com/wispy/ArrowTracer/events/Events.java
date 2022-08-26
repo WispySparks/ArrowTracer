@@ -2,16 +2,28 @@ package com.wispy.ArrowTracer.events;
 
 import com.wispy.ArrowTracer.enchantments.ArrowTracerEnchantment;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class Events {
+
+    @SubscribeEvent
+    public void worldLoad(EntityJoinLevelEvent event) {
+        Minecraft mc = Minecraft.getInstance();
+        if (event.getEntity().equals(mc.player)) {
+            System.out.println(ClientCommandHandler.runCommand("team add guards"));
+            ClientCommandHandler.runCommand("team add guards");
+            ClientCommandHandler.runCommand("team join guards " + mc.player.getName().getString());
+        }
+    }
 
     @SubscribeEvent
     public void arrowCreated(EntityJoinLevelEvent event) {
