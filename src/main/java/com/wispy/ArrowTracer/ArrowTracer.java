@@ -21,8 +21,8 @@ public class ArrowTracer {
     public static final String modID = "arrowtracer";
     public static final Logger logger = LogUtils.getLogger();
     public static final DeferredRegister<Enchantment> enchantments = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, modID);
-    public static RegistryObject<Enchantment> tracingEnchantment = enchantments.register("tracing", 
-    () -> new ArrowTracerEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND));
+    public static Enchantment tracingEnchantment =  new ArrowTracerEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND);
+    public static RegistryObject<Enchantment> regTracingEnchantment = enchantments.register("tracing", () -> tracingEnchantment);
 
     public ArrowTracer() {
         MinecraftForge.EVENT_BUS.register(this);

@@ -1,14 +1,15 @@
 package com.wispy.ArrowTracer.events;
 
+import com.wispy.ArrowTracer.ArrowTracer;
 import com.wispy.ArrowTracer.enchantments.ArrowTracerEnchantment;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.ClientCommandHandler;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -16,12 +17,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class Events {
 
     @SubscribeEvent
-    public void worldLoad(EntityJoinLevelEvent event) {
-        Minecraft mc = Minecraft.getInstance();
-        if (event.getEntity().equals(mc.player)) {
-            System.out.println(ClientCommandHandler.runCommand("team add guards"));
-            ClientCommandHandler.runCommand("team add guards");
-            ClientCommandHandler.runCommand("team join guards " + mc.player.getName().getString());
+    public void tickEvent(TickEvent.PlayerTickEvent event) {
+        Player player = event.player;
+        if (player.getUseItem().getItem() instanceof BowItem) {
+            BowItem bow = (BowItem) player.getUseItem().getItem();
+            if (bow.getEnchantmentLevel(player.getUseItem(), ArrowTracer.tracingEnchantment) > 0) { // now you have a tracing bow thats charging
+                bow.releaseUsing(player.getUseItem(), player.level, player, 10);
+            }
         }
     }
 
@@ -31,10 +33,8 @@ public class Events {
             Arrow arrow = (Arrow) event.getEntity();
             if (arrow.getOwner() == null) return;
             for (ItemStack item : arrow.getOwner().getHandSlots()) {
-                for (Tag tag : item.getEnchantmentTags()) {
-                    if (tag.getAsString().contains("arrowtracer:tracing")) {
-                        event.getEntity().addTag("tracing");
-                    }
+                if (item.getItem().getEnchantmentLevel(item, ArrowTracer.tracingEnchantment) > 0) {
+                    event.getEntity().addTag("tracing");
                 }
             }
         }

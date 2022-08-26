@@ -21,7 +21,6 @@ public class ArrowTracerEnchantment extends Enchantment {
             CompoundTag rootTag = new CompoundTag();
             CompoundTag EntityTag = new CompoundTag();
             EntityTag.putInt("SkeletonTrap", 1);
-            EntityTag.putString("Team", "guards");
             rootTag.put("EntityTag", EntityTag);
             EntityType.SKELETON_HORSE.spawn((ServerLevel) level, rootTag, null, null, pos, MobSpawnType.TRIGGERED, true, true);
         }
