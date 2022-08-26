@@ -1,14 +1,14 @@
 package com.wispy.ArrowTracer.enchantments;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
-import net.minecraftforge.client.ClientCommandHandler;
+import net.minecraft.world.level.Level;
 
 public class ArrowTracerEnchantment extends Enchantment {
 
@@ -16,13 +16,14 @@ public class ArrowTracerEnchantment extends Enchantment {
         super(pRarity, EnchantmentCategory.BOW, pApplicableSlots);
     }
     
-    @Override
-    public void doPostAttack(LivingEntity pAttacker, Entity pTarget, int pLevel) {
-        // EntityType.LIGHTNING_BOLT.spawn((ServerLevel) pAttacker.level, null, null, pTarget.blockPosition(), MobSpawnType.TRIGGERED, true, true);
-        EntityType.SKELETON_HORSE.spawn((ServerLevel) pAttacker.level, null, null, pTarget.blockPosition(), MobSpawnType.TRIGGERED, true, true);
-        String pos = pTarget.getX() + " " + pTarget.getY() + " " + pTarget.getZ();
-        ClientCommandHandler.runCommand("/summon skeleton_horse " + pos + " {SkeletonTrap:1}");
-        System.out.println("/summon skeleton_horse " + pos + " {SkeletonTrap:1}");
+    public static void spawnTrap(Level level, BlockPos pos) {
+        if (!level.isClientSide) {
+            CompoundTag rootTag = new CompoundTag();
+            CompoundTag EntityTag = new CompoundTag();
+            EntityTag.putInt("SkeletonTrap", 1);
+            rootTag.put("EntityTag", EntityTag);
+            EntityType.SKELETON_HORSE.spawn((ServerLevel) level, rootTag, null, null, pos, MobSpawnType.TRIGGERED, true, true);
+        }
     }
 
 }
