@@ -3,7 +3,7 @@ package com.wispy.ArrowTracer;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
-import com.wispy.ArrowTracer.enchantments.ArrowTracerEnchantment;
+import com.wispy.ArrowTracer.enchantments.TracerEnchantment;
 import com.wispy.ArrowTracer.events.Events;
 
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -21,7 +21,7 @@ public class ArrowTracer {
     public static final String MODID = "arrowtracer";
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, MODID);
-    public static final RegistryObject<Enchantment> TRACING_ENCHANTMENT = ENCHANTMENTS.register("tracing", () -> ArrowTracerEnchantment.tracingEnchantment);
+    public static final RegistryObject<Enchantment> TRACING_ENCHANTMENT = ENCHANTMENTS.register("tracing", () -> TracerEnchantment.tracingEnchantment);
 
     public ArrowTracer() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();

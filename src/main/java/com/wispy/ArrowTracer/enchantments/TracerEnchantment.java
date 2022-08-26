@@ -10,11 +10,11 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.level.Level;
 
-public class ArrowTracerEnchantment extends Enchantment {
+public class TracerEnchantment extends Enchantment {
 
-    public static final Enchantment tracingEnchantment =  new ArrowTracerEnchantment(EquipmentSlot.MAINHAND);
+    public static final Enchantment tracingEnchantment =  new TracerEnchantment(EquipmentSlot.MAINHAND);
 
-    public ArrowTracerEnchantment(EquipmentSlot... pApplicableSlots) {
+    public TracerEnchantment(EquipmentSlot... pApplicableSlots) {
         super(Rarity.RARE, EnchantmentCategory.BOW, pApplicableSlots);
     }
     

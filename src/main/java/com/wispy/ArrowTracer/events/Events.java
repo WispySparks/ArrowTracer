@@ -1,11 +1,12 @@
 package com.wispy.ArrowTracer.events;
 
-import com.wispy.ArrowTracer.enchantments.ArrowTracerEnchantment;
+import com.wispy.ArrowTracer.enchantments.TracerEnchantment;
+import com.wispy.ArrowTracer.entities.TracerArrow;
 
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
@@ -21,14 +22,14 @@ public class Events {
         Player player = event.player;
         if (player.getUseItem().getItem() instanceof BowItem) {
             BowItem bow = (BowItem) player.getUseItem().getItem();
-            if (bow.getEnchantmentLevel(player.getUseItem(), ArrowTracerEnchantment.tracingEnchantment) > 0) { // now you have a tracing bow thats charging
-                bow.releaseUsing(player.getUseItem(), player.level, player, player.getUseItemRemainingTicks());
+            if (bow.getEnchantmentLevel(player.getUseItem(), TracerEnchantment.tracingEnchantment) > 0) { // now you have a tracing bow thats charging
                 int charge = bow.getUseDuration(player.getUseItem()) - player.getUseItemRemainingTicks();
                 float velocity = BowItem.getPowerForTime(charge);
-                System.out.println(velocity);
-                player.level.addParticle(ParticleTypes.HEART, 
-                player.getX(), player.getY(), player.getZ(),
-                50, 50, 50);
+                if (velocity >= 1) {
+                    AbstractArrow arrow = new TracerArrow(player.level, player);
+                    arrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, velocity * 3.0F, 0);
+                    player.level.addFreshEntity(arrow);
+                }
             }
         }
     }
@@ -39,7 +40,7 @@ public class Events {
             Arrow arrow = (Arrow) event.getEntity();
             if (arrow.getOwner() == null) return;
             for (ItemStack item : arrow.getOwner().getHandSlots()) {
-                if (item.getItem().getEnchantmentLevel(item, ArrowTracerEnchantment.tracingEnchantment) > 0) {
+                if (item.getItem().getEnchantmentLevel(item, TracerEnchantment.tracingEnchantment) > 0) {
                     event.getEntity().addTag("tracing");
                 }
             }
