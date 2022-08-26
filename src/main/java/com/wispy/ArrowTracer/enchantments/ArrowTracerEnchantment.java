@@ -12,8 +12,10 @@ import net.minecraft.world.level.Level;
 
 public class ArrowTracerEnchantment extends Enchantment {
 
-    public ArrowTracerEnchantment(Rarity pRarity, EquipmentSlot... pApplicableSlots) {
-        super(pRarity, EnchantmentCategory.BOW, pApplicableSlots);
+    public static final Enchantment tracingEnchantment =  new ArrowTracerEnchantment(EquipmentSlot.MAINHAND);
+
+    public ArrowTracerEnchantment(EquipmentSlot... pApplicableSlots) {
+        super(Rarity.RARE, EnchantmentCategory.BOW, pApplicableSlots);
     }
     
     public static void spawnTrap(Level level, BlockPos pos) {
