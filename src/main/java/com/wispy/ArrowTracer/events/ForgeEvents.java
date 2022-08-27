@@ -3,16 +3,10 @@ package com.wispy.ArrowTracer.events;
 import com.wispy.ArrowTracer.enchantment.TracerEnchantment;
 import com.wispy.ArrowTracer.entity.projectile.TracerArrow;
 
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.BowItem;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ForgeEvents {
@@ -29,32 +23,6 @@ public class ForgeEvents {
                 AbstractArrow arrow = new TracerArrow(player, player.level);
                 arrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, velocity * 3.0F, 0);
                 player.level.addFreshEntity(arrow);
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public void arrowCreated(EntityJoinLevelEvent event) {
-        if (event.getEntity().getType().equals(EntityType.ARROW)) {
-            Arrow arrow = (Arrow) event.getEntity();
-            if (arrow.getOwner() == null) return;
-            for (ItemStack item : arrow.getOwner().getHandSlots()) {
-                if (item.getItem().getEnchantmentLevel(item, TracerEnchantment.tracingEnchantment) > 0) {
-                    event.getEntity().addTag("tracing");
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public void arrowHit(LivingAttackEvent event) {
-        if (event.getSource().getDirectEntity() == null) return;
-        if (event.getSource().getDirectEntity().getType().equals(EntityType.ARROW)) {
-            Entity arrow = event.getSource().getDirectEntity();
-            for (String tag : arrow.getTags()) {
-                if (tag.equals("tracing")) {
-                    // ArrowTracerEnchantment.spawnTrap(arrow.getLevel(), arrow.blockPosition());
-                }
             }
         }
     }
