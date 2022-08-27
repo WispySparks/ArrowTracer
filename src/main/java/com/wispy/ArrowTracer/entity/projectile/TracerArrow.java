@@ -3,6 +3,7 @@ package com.wispy.ArrowTracer.entity.projectile;
 import com.wispy.ArrowTracer.entity.ModEntityTypes;
 
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -13,6 +14,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 
 public class TracerArrow extends AbstractArrow {
+
+    private static Entity target;
     
     public TracerArrow(EntityType<? extends AbstractArrow> type, Level level) {
         super(type, level);
@@ -33,6 +36,7 @@ public class TracerArrow extends AbstractArrow {
     public void tick() {
         super.tick();
         if (this.tickCount % 2 == 0) {
+            if (this.getOwner() == null) return;
             if (this.distanceTo(this.getOwner()) > 4) {
                 this.level.addAlwaysVisibleParticle(ParticleTypes.SMOKE, true,
                 this.getX(), this.getY(), this.getZ(), 0, 0, 0);
@@ -42,11 +46,19 @@ public class TracerArrow extends AbstractArrow {
 
     @Override
     protected void onHitEntity(EntityHitResult pResult) { // discard arrow on entity hit
+        if (pResult.getEntity() != TracerArrow.target && TracerArrow.target != null) {
+            TracerArrow.target.setGlowingTag(false);
+        }
+        TracerArrow.target = pResult.getEntity();
+        pResult.getEntity().setGlowingTag(true);
         this.discard();
     }
 
     @Override
     protected void onHitBlock(BlockHitResult pResult) { // discard arrow on block hit
+        if (TracerArrow.target != null) {
+            TracerArrow.target.setGlowingTag(false);
+        }
         this.discard();
     }
     

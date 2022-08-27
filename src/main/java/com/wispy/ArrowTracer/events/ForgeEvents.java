@@ -12,17 +12,19 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class ForgeEvents {
 
     @SubscribeEvent
-    public void tickEvent(TickEvent.PlayerTickEvent event) { // handle the tracing arrow code
+    public void playerTickEvent(TickEvent.PlayerTickEvent event) { // handle the tracing arrow code
         Player player = event.player;
-        if (player.tickCount % 5 != 0) return;
+        if (player.tickCount % 3 != 0) return;
         if (player.getUseItem().getItem() instanceof BowItem) {
             BowItem bow = (BowItem) player.getUseItem().getItem();
             if (bow.getEnchantmentLevel(player.getUseItem(), TracerEnchantment.tracingEnchantment) > 0) { // now you have a tracing bow thats charging
                 int charge = bow.getUseDuration(player.getUseItem()) - player.getUseItemRemainingTicks();
                 float velocity = BowItem.getPowerForTime(charge);
-                AbstractArrow arrow = new TracerArrow(player, player.level);
-                arrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, velocity * 3.0F, 0);
-                player.level.addFreshEntity(arrow);
+                if (velocity >= 1) {
+                    AbstractArrow arrow = new TracerArrow(player, player.level);
+                    arrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, velocity * 3.0F, 0);
+                    player.level.addFreshEntity(arrow);
+                }
             }
         }
     }
