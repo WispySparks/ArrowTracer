@@ -16,6 +16,7 @@ public class TracerArrow extends AbstractArrow {
     
     public TracerArrow(EntityType<? extends AbstractArrow> type, Level level) {
         super(type, level);
+        this.setSilent(true);
     }
 
     public TracerArrow(LivingEntity shooter, Level level) {
@@ -31,9 +32,11 @@ public class TracerArrow extends AbstractArrow {
     @Override
     public void tick() {
         super.tick();
-        if (!this.inGround) { // particle trail
-            this.level.addParticle(ParticleTypes.HAPPY_VILLAGER, 
-            this.getX(), this.getY(), this.getZ(), 1, 1, 1);
+        if (this.tickCount % 2 == 0) {
+            if (this.distanceTo(this.getOwner()) > 4) {
+                this.level.addAlwaysVisibleParticle(ParticleTypes.SMOKE, true,
+                this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+            }
         }
     }
 

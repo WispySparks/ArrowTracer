@@ -20,6 +20,7 @@ public class ForgeEvents {
     @SubscribeEvent
     public void tickEvent(TickEvent.PlayerTickEvent event) { // handle the tracing arrow code
         Player player = event.player;
+        if (player.tickCount % 5 != 0) return;
         if (player.getUseItem().getItem() instanceof BowItem) {
             BowItem bow = (BowItem) player.getUseItem().getItem();
             if (bow.getEnchantmentLevel(player.getUseItem(), TracerEnchantment.tracingEnchantment) > 0) { // now you have a tracing bow thats charging
