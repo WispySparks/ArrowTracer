@@ -1,7 +1,7 @@
 package com.wispy.ArrowTracer.events;
 
-import com.wispy.ArrowTracer.enchantments.TracerEnchantment;
-import com.wispy.ArrowTracer.entities.TracerArrow;
+import com.wispy.ArrowTracer.enchantment.TracerEnchantment;
+import com.wispy.ArrowTracer.entity.projectile.TracerArrow;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -15,7 +15,7 @@ import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public class Events {
+public class ForgeEvents {
 
     @SubscribeEvent
     public void tickEvent(TickEvent.PlayerTickEvent event) {
@@ -25,11 +25,9 @@ public class Events {
             if (bow.getEnchantmentLevel(player.getUseItem(), TracerEnchantment.tracingEnchantment) > 0) { // now you have a tracing bow thats charging
                 int charge = bow.getUseDuration(player.getUseItem()) - player.getUseItemRemainingTicks();
                 float velocity = BowItem.getPowerForTime(charge);
-                if (velocity >= 1) {
-                    AbstractArrow arrow = new TracerArrow(player.level, player);
-                    arrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, velocity * 3.0F, 0);
-                    player.level.addFreshEntity(arrow);
-                }
+                AbstractArrow arrow = new TracerArrow(player, player.level);
+                arrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, velocity * 3.0F, 0);
+                player.level.addFreshEntity(arrow);
             }
         }
     }
