@@ -19,7 +19,7 @@ public class ArrowTracer {
     public static final String MODID = "arrowtracer";
     public static final Logger LOGGER = LogUtils.getLogger();
     
-    public ArrowTracer() {
+    public ArrowTracer() { // register my events and registries
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new ForgeEvents());

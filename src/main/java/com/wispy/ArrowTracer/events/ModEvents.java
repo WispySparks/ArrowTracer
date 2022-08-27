@@ -9,7 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class ModEvents {
     
     @SubscribeEvent
-    public void entityRendererSetup(EntityRenderersEvent.RegisterRenderers event) {
+    public void entityRendererSetup(EntityRenderersEvent.RegisterRenderers event) { // register my arrow renderer to my arrow
         event.registerEntityRenderer(ModEntityTypes.TRACER_ARROW.get(), TracerArrowRenderer::new);
     }
 

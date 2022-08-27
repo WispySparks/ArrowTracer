@@ -9,6 +9,8 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 
 public class TracerArrow extends AbstractArrow {
     
@@ -18,6 +20,7 @@ public class TracerArrow extends AbstractArrow {
 
     public TracerArrow(LivingEntity shooter, Level level) {
         super(ModEntityTypes.TRACER_ARROW.get(), shooter, level);
+        this.setSilent(true);
     }
 
     @Override
@@ -28,10 +31,20 @@ public class TracerArrow extends AbstractArrow {
     @Override
     public void tick() {
         super.tick();
-        if (!this.inGround) {
+        if (!this.inGround) { // particle trail
             this.level.addParticle(ParticleTypes.HAPPY_VILLAGER, 
             this.getX(), this.getY(), this.getZ(), 1, 1, 1);
         }
+    }
+
+    @Override
+    protected void onHitEntity(EntityHitResult pResult) { // discard arrow on entity hit
+        this.discard();
+    }
+
+    @Override
+    protected void onHitBlock(BlockHitResult pResult) { // discard arrow on block hit
+        this.discard();
     }
     
 }

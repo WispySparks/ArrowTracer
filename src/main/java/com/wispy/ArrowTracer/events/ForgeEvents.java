@@ -18,7 +18,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class ForgeEvents {
 
     @SubscribeEvent
-    public void tickEvent(TickEvent.PlayerTickEvent event) {
+    public void tickEvent(TickEvent.PlayerTickEvent event) { // handle the tracing arrow code
         Player player = event.player;
         if (player.getUseItem().getItem() instanceof BowItem) {
             BowItem bow = (BowItem) player.getUseItem().getItem();
