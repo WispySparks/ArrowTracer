@@ -1,0 +1,22 @@
+ {
+    "type" : "minecraft:crafting_shaped",
+    "pattern" : [
+        "e  ",
+        " pp",
+        " ps"
+    ],
+    "key" : {
+        "p" : {
+            "item" : "minecraft:paper"
+        },
+        "s" : {
+            "item" : "minecraft:spectral_arrow"
+        },
+        "e" : {
+            "item" : "minecraft:emerald"
+        }
+    },
+    "result" : {
+        "item" : "arrowtracer:tracing_enchantment"
+    }
+ }

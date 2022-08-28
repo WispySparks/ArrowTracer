@@ -1,6 +1,6 @@
 package com.wispy.ArrowTracer.events;
 
-import com.wispy.ArrowTracer.enchantment.TracerEnchantment;
+import com.wispy.ArrowTracer.enchantment.TracingEnchantment;
 import com.wispy.ArrowTracer.entity.projectile.TracerArrow;
 
 import net.minecraft.world.entity.player.Player;
@@ -17,7 +17,7 @@ public class ForgeEvents {
         if (player.tickCount % 3 != 0) return;
         if (player.getUseItem().getItem() instanceof BowItem) {
             BowItem bow = (BowItem) player.getUseItem().getItem();
-            if (bow.getEnchantmentLevel(player.getUseItem(), TracerEnchantment.tracingEnchantment) > 0) { // now you have a tracing bow thats charging
+            if (bow.getEnchantmentLevel(player.getUseItem(), TracingEnchantment.tracingEnchantment) > 0) { // now you have a tracing bow thats charging
                 int charge = bow.getUseDuration(player.getUseItem()) - player.getUseItemRemainingTicks();
                 float velocity = BowItem.getPowerForTime(charge);
                 if (velocity >= 1) {

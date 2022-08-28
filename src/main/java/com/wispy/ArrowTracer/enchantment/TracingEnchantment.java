@@ -4,11 +4,11 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
-public class TracerEnchantment extends Enchantment {
+public class TracingEnchantment extends Enchantment {
 
-    public static final Enchantment tracingEnchantment =  new TracerEnchantment(EquipmentSlot.MAINHAND);
+    public static final Enchantment tracingEnchantment =  new TracingEnchantment(EquipmentSlot.MAINHAND);
 
-    public TracerEnchantment(EquipmentSlot... pApplicableSlots) {
+    public TracingEnchantment(EquipmentSlot... pApplicableSlots) {
         super(Rarity.RARE, EnchantmentCategory.BOW, pApplicableSlots);
     }
     

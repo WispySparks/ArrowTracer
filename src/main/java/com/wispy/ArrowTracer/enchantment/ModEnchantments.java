@@ -15,7 +15,7 @@ public class ModEnchantments {
     public static final RegistryObject<Enchantment> TRACING_ENCHANTMENT; 
     
     static {
-        TRACING_ENCHANTMENT = ENCHANTMENTS.register("tracing", () -> TracerEnchantment.tracingEnchantment);
+        TRACING_ENCHANTMENT = ENCHANTMENTS.register("tracing_enchantment", () -> TracingEnchantment.tracingEnchantment);
     }
 
     public static void register(IEventBus eventBus) {
