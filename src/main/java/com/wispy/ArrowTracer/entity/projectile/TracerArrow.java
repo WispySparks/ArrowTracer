@@ -15,7 +15,7 @@ import net.minecraft.world.phys.EntityHitResult;
 
 public class TracerArrow extends AbstractArrow {
 
-    private static Entity target;
+    public static Entity target;
     
     public TracerArrow(EntityType<? extends AbstractArrow> type, Level level) {
         super(type, level);
@@ -48,9 +48,11 @@ public class TracerArrow extends AbstractArrow {
     protected void onHitEntity(EntityHitResult pResult) { // discard arrow on entity hit
         if (pResult.getEntity() != TracerArrow.target && TracerArrow.target != null) {
             TracerArrow.target.setGlowingTag(false);
+            TracerArrow.target.removeTag("tracered");
         }
         TracerArrow.target = pResult.getEntity();
-        pResult.getEntity().setGlowingTag(true);
+        TracerArrow.target.setGlowingTag(true);
+        TracerArrow.target.addTag("tracered");
         this.discard();
     }
 

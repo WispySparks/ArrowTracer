@@ -7,6 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.BowItem;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ForgeEvents {
@@ -25,6 +26,16 @@ public class ForgeEvents {
                     arrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, velocity * 3.0F, 0);
                     player.level.addFreshEntity(arrow);
                 }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void arrowHit(LivingDamageEvent event) {
+        if (event.getEntity() == TracerArrow.target) {
+            if (event.getEntity().getTags().contains("tracered")) {
+                event.getEntity().setGlowingTag(false);
+                event.getEntity().removeTag("tracered");
             }
         }
     }
