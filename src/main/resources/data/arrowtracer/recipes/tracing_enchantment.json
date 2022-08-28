@@ -17,6 +17,12 @@
         }
     },
     "result" : {
-        "item" : "minecraft:enchanted_book"
+        "item" : "minecraft:enchanted_book",
+        "count" : 1,
+        "nbt" : {
+            "StoredEnchantments" : [
+                {"id":"arrowtracer:tracing_enchantment","lvl":1}
+            ]
+        }
     }
  }
