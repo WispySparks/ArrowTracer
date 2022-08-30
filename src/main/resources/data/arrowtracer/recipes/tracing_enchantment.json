@@ -1,9 +1,9 @@
  {
     "type" : "minecraft:crafting_shaped",
     "pattern" : [
-        "e  ",
-        " pp",
-        " ps"
+        "eai",
+        "app",
+        "ips"
     ],
     "key" : {
         "p" : {
@@ -14,6 +14,12 @@
         },
         "e" : {
             "item" : "minecraft:emerald"
+        },
+        "i" : {
+            "item" : "minecraft:glow_ink_sac"
+        },
+        "a" : {
+            "item" : "minecraft:amethyst_block"
         }
     },
     "result" : {
