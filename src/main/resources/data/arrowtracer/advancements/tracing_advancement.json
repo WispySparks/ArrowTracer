@@ -1,0 +1,30 @@
+{
+    "display": {
+      "icon": {
+        "item": "minecraft:enchanted_book"
+      },
+      "title": "Tracer Enchantment Unlocked!",
+      "description": "Find the key ingredient for tracing",
+      "show_toast": true,
+      "announce_to_chat": false,
+      "hidden": false
+    },
+    "criteria": {
+      "requirement": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "tag": "minecraft:spectral_arrow",
+              "count" : 1
+            }
+          ]
+        }
+      }
+    },
+    "rewards": {
+      "recipes": [
+        "arrowtracer:tracing_enchantment"
+      ]
+    }
+  }
