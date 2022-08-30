@@ -3,10 +3,10 @@
       "icon": {
         "item": "minecraft:enchanted_book"
       },
-      "title": "Tracer Enchantment Unlocked!",
-      "description": "Find the key ingredient for tracing",
+      "title": "Tracer Enchantment Learned!",
+      "description": "Find the key ingredient for the tracing enchantment",
       "show_toast": true,
-      "announce_to_chat": false,
+      "announce_to_chat": true,
       "hidden": false
     },
     "criteria": {
@@ -15,8 +15,9 @@
         "conditions": {
           "items": [
             {
-              "tag": "minecraft:spectral_arrow",
-              "count" : 1
+              "items" : [
+                "minecraft:spectral_arrow"
+              ]
             }
           ]
         }
