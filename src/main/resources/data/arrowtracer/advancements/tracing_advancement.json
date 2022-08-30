@@ -3,7 +3,7 @@
       "icon": {
         "item": "minecraft:enchanted_book"
       },
-      "title": "Tracer Enchantment Learned!",
+      "title": "The Master Tracker!",
       "description": "Find the key ingredient for the tracing enchantment",
       "show_toast": true,
       "announce_to_chat": true,
